@@ -6,11 +6,12 @@ import { Post } from './entities/post.entity';
 import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
-import { ModuleRef } from '@nestjs/core';
+
 @Injectable()
 export class PostsService {
   constructor(
     @InjectRepository(Post) private postRepository: Repository<Post>,
+    @Inject(forwardRef(() => UsersService))
     private readonly userService: UsersService,
   ) {}
 
