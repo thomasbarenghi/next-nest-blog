@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 @ObjectType()
@@ -28,4 +29,7 @@ export class Post {
   @Column()
   @Field()
   updatedAt: Date;
+  @ManyToOne(() => User, (user) => user.posts)
+  @Field(() => User, {nullable: true})
+  user?: User;
 }

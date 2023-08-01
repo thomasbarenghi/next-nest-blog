@@ -12,4 +12,6 @@ export class CreatePostInput {
   price: number;
   @Field()
   image: string;
+  @Field()
+  authorId: string;
 }
