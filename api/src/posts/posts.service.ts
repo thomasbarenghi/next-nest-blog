@@ -5,12 +5,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './entities/post.entity';
 import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class PostsService {
   constructor(
     @InjectRepository(Post) private postRepository: Repository<Post>,
-    @InjectRepository(User) private userRepository: Repository<User>,
+    private readonly userService: UsersService,
   ) {}
 
   findAll(): Promise<Post[]> {
@@ -22,22 +23,20 @@ export class PostsService {
   }
 
   async create(CreatePostInput: CreatePostInput): Promise<Post> {
-    const author = await this.userRepository.findOne({
-      where: { id: CreatePostInput.authorId },
-    });
-
-    if (!author) {
-      throw new Error('Usuario no encontrado'); // O manejar el error de otra manera
-    }
-
     const post = this.postRepository.create(CreatePostInput);
     post.createdAt = new Date();
     post.updatedAt = new Date();
 
-    post.user = author;
-
     return this.postRepository.save(post);
   }
+
+  async getAuthor(authorId: string): Promise<User> {
+    return this.userService.findOne(authorId);
+  }
+
+  // findAllByAuthorId(authorId: string): Promise<Post[]> {
+  //   return this.postRepository.find({ where: { authorId } });
+  // }
 
   // async update(id: number, updatePostInput: UpdatePostInput): Promise<Post> {
   //   const post = await this.postRepository.findOne({ where: { id } });

@@ -26,7 +26,7 @@ export class User {
   @Column()
   @Field()
   updatedAt: Date;
-  @OneToMany(() => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.author)
   @Field(() => [Post])
   posts: Post[];
 }

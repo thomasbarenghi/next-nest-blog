@@ -27,7 +27,8 @@ type Post {
   image: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  user: User
+  authorId: String!
+  author: User!
 }
 
 type Query {

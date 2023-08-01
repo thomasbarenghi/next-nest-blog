@@ -5,7 +5,7 @@ import { User } from '../../users/entities/user.entity';
 @Entity()
 @ObjectType()
 export class Post {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
   @Column()
@@ -29,7 +29,10 @@ export class Post {
   @Column()
   @Field()
   updatedAt: Date;
+  @Column()
+  @Field()
+  authorId: string;
   @ManyToOne(() => User, (user) => user.posts)
-  @Field(() => User, {nullable: true})
-  user?: User;
+  @Field(() => User, { nullable: false })
+  author: User;
 }

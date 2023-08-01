@@ -4,11 +4,13 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { PostsService } from 'src/posts/posts.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+   // private readonly postService: PostsService,
   ) {}
 
   async create(CreateUserInput: CreateUserInput): Promise<User> {
@@ -29,6 +31,11 @@ export class UsersService {
   async findByEmail(email: string) {
     return await this.userRepository.findOne({ where: { email } });
   }
+
+  // async findUserPosts(authorId: string) {
+  //   //   return await this.postService.findAllByAuthorId(authorId);
+  //   return null;
+  // }
 
   // update(id: number, updateUserInput: UpdateUserInput) {
   //   return `This action updates a #${id} user`;
