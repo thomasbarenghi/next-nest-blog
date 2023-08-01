@@ -36,11 +36,11 @@ export class UsersResolver {
     return this.usersService.findOne(id);
   }
 
-  // @ResolveField('posts', (returns) => [Post])
-  // async getPosts(@Parent() author: User) {
-  //   const { id } = author;
-  //   return this.usersService.findUserPosts(id);
-  // }
+  @ResolveField('posts', (returns) => [Post])
+  async getPosts(@Parent() author: User) {
+    const { id } = author;
+    return this.usersService.findUserPosts(id);
+  }
 
   // @Mutation(() => User)
   // updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {

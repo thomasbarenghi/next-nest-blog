@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { CreatePostInput } from './dto/create-post.input';
 // import { UpdatePostInput } from './dto/update-post.input';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,7 +6,7 @@ import { Post } from './entities/post.entity';
 import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
-
+import { ModuleRef } from '@nestjs/core';
 @Injectable()
 export class PostsService {
   constructor(
@@ -34,9 +34,9 @@ export class PostsService {
     return this.userService.findOne(authorId);
   }
 
-  // findAllByAuthorId(authorId: string): Promise<Post[]> {
-  //   return this.postRepository.find({ where: { authorId } });
-  // }
+  findAllByAuthorId(authorId: string): Promise<Post[]> {
+    return this.postRepository.find({ where: { authorId } });
+  }
 
   // async update(id: number, updatePostInput: UpdatePostInput): Promise<Post> {
   //   const post = await this.postRepository.findOne({ where: { id } });
