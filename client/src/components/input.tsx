@@ -1,7 +1,4 @@
 "use client";
-
-import { useRouter } from "next/router";
-
 type InputProps = {
   type: string;
   name: string;
@@ -24,12 +21,8 @@ type InputProps = {
 };
 
 export default function Input(props: InputProps) {
-  const router = useRouter();
-  const className = `${
-    router.pathname.startsWith("/admin")
-      ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
-      : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
-  }`;
+  
+
 
   return (
     <label
@@ -47,7 +40,7 @@ export default function Input(props: InputProps) {
           prefix={props.prefix}
           onChange={props.onChange}
           placeholder={props.placeholder}
-          className={`${props.className} smalltext min-w-0 rounded-2xl px-4 py-2 ${className}`}
+          className={`${props.className} smalltext min-w-0 rounded-2xl px-4 py-2 `}
           style={{ borderWidth: "1px" }}
           required={props.required}
           autoComplete={props.autoComplete || "off"}
@@ -75,7 +68,7 @@ export default function Input(props: InputProps) {
           value={props.value}
           onChange={props.onChange}
           placeholder={props.placeholder}
-          className={`${props.className} smalltext min-w-0 rounded-2xl px-4 py-2 ${className}`}
+          className={`${props.className} smalltext min-w-0 rounded-2xl px-4 py-2 `}
           style={{ borderWidth: "1px" }}
           required={props.required}
           rows={props.rows}

@@ -1,23 +1,16 @@
 "use client";
 import { Input } from "@/components";
-import Link from "next/link";
-import Head from "next/head";
+import AuthBase from "./authBase";
+import useValidate from "@/hooks/useValidate";
 import { useAppDispatch } from "@/redux/hooks";
 import { login } from "@/redux/slices/authSession";
-import useRegister from "@/hooks/useRegister";
 import { changeManager, submitManager } from "@/utils/forms/validateAndSend";
-import useValidate from "@/hooks/useValidate";
+import Link from "next/link";
+import Head from "next/head";
 import { toast } from "sonner";
-import { toastError } from "@/utils/toastStyles";
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 export default function Home() {
-  const router = useRouter();
-
-  //quitamos todo lo que esta antes del primer signo de interrogacion
-  const query: string = router.asPath.split("auth")[1] || "";
-
   const dispatch = useAppDispatch();
   const validate = useValidate();
   const [formValues, setFormValues] = useState({});
@@ -44,59 +37,52 @@ export default function Home() {
       });
     } catch (error) {
       console.error(error);
-      toast.error("Verifica los campos del formulario", toastError);
+      toast.error("Verifica los campos del formulario");
     }
   };
 
   return (
     <>
       <Head>
-        <title>Iniciar sesion | Spaces</title>
+        <title>Iniciar sesion | Articly</title>
         <meta name="theme-color" content="#1e40af" />
       </Head>
-
-      <h1 className="titulo-3 mb-6 font-normal">
-        Hey, bienvenido <span className="font-semibold">de nuevo</span>
-      </h1>
-      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
-        <Input
-          type="email"
-          name="email"
-          label="Correo electrónico"
-          placeholder="Correo electrónico"
-          className="w-full"
-          onChange={handleChange}
-          error={errors.email}
-        />
-        <Input
-          type="password"
-          name="password"
-          label="Contraseña"
-          placeholder="Contraseña"
-          onChange={handleChange}
-          error={errors.password}
-        />
-        {/* <p className=" w-full text-center font-light">
-            ¿No recuerdas tu contraseña?{" "}
-            <Link href="/auth/recover" className="font-medium text-blue-700">
-              Recuperar
-            </Link>
-          </p> */}
-        <button type="submit" className="primaryButton">
-          Ingresar
-        </button>
-      </form>
-      {/* <hr className="my-6 w-full" /> */}
-      {/* <GoogleButton /> */}
-      <p className="mt-6 w-full text-center font-light">
-        ¿No tienes una cuenta?{" "}
-        <Link
-          href={`/auth/register${query}`}
-          className="font-medium text-blue-700"
-        >
-          Regístrate
-        </Link>
-      </p>
+      <AuthBase image="/image/auth/login.jpg">
+        <h1 className="titulo-3 mb-6 font-normal">
+          Hola, bienvenido <b>de nuevo</b>
+        </h1>
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
+          <Input
+            type="email"
+            name="email"
+            label="Correo electrónico"
+            placeholder="Correo electrónico"
+            className="w-full"
+            onChange={handleChange}
+            error={errors.email}
+          />
+          <Input
+            type="password"
+            name="password"
+            label="Contraseña"
+            placeholder="Contraseña"
+            onChange={handleChange}
+            error={errors.password}
+          />
+          <button type="submit" className="primaryButton">
+            Ingresar
+          </button>
+        </form>
+        <p className="mt-6 w-full text-center font-light">
+          ¿No tienes una cuenta?{" "}
+          <Link
+            href={`/auth/register`}
+            className="font-medium text-emerald-800"
+          >
+            Regístrate
+          </Link>
+        </p>
+      </AuthBase>
     </>
   );
 }

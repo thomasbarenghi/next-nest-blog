@@ -7,7 +7,7 @@ export default function Home() {
   const current = useAppSelector((state) => state.authSession.session.current);
   console.log(current);
   return (
-    <section className="flex col-center ">
+    <section className="flex col-center  ">
       <div className="w-[65%] col-center gap-2 ">
         <h1 className="text-center titulo-1">
           Descubre noticias, blogs y herramientas sobre el cuidado y la{" "}
