@@ -1,4 +1,3 @@
-
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import Router from "next/router";
 import { toast } from "sonner";
@@ -32,7 +31,7 @@ export const setSession = createAsyncThunk(
     } catch (err: any) {
       throw new Error("Error al loguear el usuario", err);
     }
-  }
+  },
 );
 
 export const login = createAsyncThunk(
@@ -44,7 +43,7 @@ export const login = createAsyncThunk(
     } catch (err: any) {
       throw new Error("Error al loguear el usuario", err);
     }
-  }
+  },
 );
 
 export const register = createAsyncThunk(
@@ -58,7 +57,7 @@ export const register = createAsyncThunk(
       console.error("Error al crear el usuario", err);
       throw new Error("Error al crear el usuario", err);
     }
-  }
+  },
 );
 
 export const editUser = createAsyncThunk(
@@ -74,14 +73,14 @@ export const editUser = createAsyncThunk(
       const res = await axiosPutter(
         "/rest/users/edit",
         userData,
-        "multipart/form-data"
+        "multipart/form-data",
       );
       return res.data;
     } catch (err: any) {
       console.error("Error al crear el usuario", err);
       throw new Error("Error al crear el usuario", err);
     }
-  }
+  },
 );
 
 export const changePassword = createAsyncThunk(
@@ -96,7 +95,7 @@ export const changePassword = createAsyncThunk(
       console.error("Error al cambiar contraseña", err);
       throw new Error("Error al cambiar contraseña", err);
     }
-  }
+  },
 );
 
 const postsSlice = createSlice({
@@ -129,7 +128,7 @@ const postsSlice = createSlice({
       .addCase(login.pending, (state, action) => {})
       .addCase(login.fulfilled, (state, action) => {
         Router.push(
-          `/client?id=${action.payload.userId}&status=ok&session=${action.payload.id}&loginMethod=local`
+          `/client?id=${action.payload.userId}&status=ok&session=${action.payload.id}&loginMethod=local`,
         );
       })
       .addCase(login.rejected, (state, action) => {

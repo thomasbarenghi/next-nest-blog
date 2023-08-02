@@ -80,7 +80,7 @@ export const isValidPassword = (value: string): validResponse => {
   }
   const isValid =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/.test(
-      value
+      value,
     );
 
   if (!isValid) {

@@ -18,7 +18,7 @@ export class UserClass {
     email: string,
     isSuperAdmin: boolean,
     softDelete: boolean,
-    coverImage: string
+    coverImage: string,
   ) {
     this.id = id;
     this.firstName = firstName;
@@ -81,7 +81,7 @@ export class UserClass {
       input.email,
       input.isSuperAdmin,
       input.softDelete,
-      input.coverImage
+      input.coverImage,
     );
   }
 }

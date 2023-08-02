@@ -38,7 +38,7 @@ const SecurityHOC: React.FC<Props> = ({ children }) => {
           VERIFY_SESSION,
           {
             userId: userId,
-          }
+          },
         );
 
         if (verifData.verifySession === true) {
@@ -63,7 +63,7 @@ const SecurityHOC: React.FC<Props> = ({ children }) => {
     const authObj = new AuthClass(
       statusQy === "ok" ? true : false,
       loginMethodQy as string,
-      sessionQy as string
+      sessionQy as string,
     );
 
     verifySession(authObj);
@@ -96,7 +96,7 @@ const SecurityHOC: React.FC<Props> = ({ children }) => {
       statusQy,
       searchParams,
       session?.getId(),
-    ]
+    ],
   );
 
   useEffect(() => {

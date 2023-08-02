@@ -19,12 +19,12 @@ type ValidationResult = {
 const useValidate = (): ((
   value: string | File,
   type: string,
-  fileType: string
+  fileType: string,
 ) => ValidationResult) => {
   return (
     value: string | object,
     type: string,
-    fileType: string
+    fileType: string,
   ): ValidationResult => {
     let error: ValidationErrors = {};
     let isValid = false;
